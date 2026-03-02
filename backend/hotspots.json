@@ -1,0 +1,7 @@
+[
+  { "lat": 17.385, "lng": 78.486, "risk": "High" },
+  { "lat": 17.395, "lng": 78.496, "risk": "Medium" },
+  { "lat": 17.405, "lng": 78.506, "risk": "Low" },
+  { "lat": 17.415, "lng": 78.516, "risk": "High" },
+  { "lat": 17.425, "lng": 78.526, "risk": "Low" }
+]
