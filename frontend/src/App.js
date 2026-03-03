@@ -13,10 +13,8 @@ function App() {
   const [routeCoords, setRouteCoords] = useState([]);
 
   // Input states
-  const [srcLat, setSrcLat] = useState("");
-  const [srcLng, setSrcLng] = useState("");
-  const [destLat, setDestLat] = useState("");
-  const [destLng, setDestLng] = useState("");
+  const [source, setSource] = useState("");
+  const [destination, setDestination] = useState("");
 
   // Fetch hotspots
   useEffect(() => {
@@ -35,22 +33,37 @@ function App() {
 
   // Fetch route
   const getRoute = async () => {
-    try {
-      const res = await axios.get("http://localhost:5000/route", {
-        params: { srcLat, srcLng, destLat, destLng }
-      });
+  try {
+    // 1️⃣ Get Source Coordinates
+    const srcRes = await axios.get("http://localhost:5000/geocode", {
+      params: { place: source }
+    });
 
-      // OSRM returns coordinates as [lng, lat]
-      const coords = res.data.routes[0].geometry.coordinates.map(
-        (coord) => [coord[1], coord[0]]
-      );
+    const destRes = await axios.get("http://localhost:5000/geocode", {
+      params: { place: destination }
+    });
 
-      setRouteCoords(coords);
-    } catch (error) {
-      console.error("Route error:", error);
-      alert("Failed to get route");
-    }
-  };
+    const srcLat = srcRes.data.lat;
+    const srcLng = srcRes.data.lng;
+    const destLat = destRes.data.lat;
+    const destLng = destRes.data.lng;
+
+    // 2️⃣ Get Route
+    const routeRes = await axios.get("http://localhost:5000/route", {
+      params: { srcLat, srcLng, destLat, destLng }
+    });
+
+    const coords = routeRes.data.routes[0].geometry.coordinates.map(
+      (coord) => [coord[1], coord[0]]
+    );
+
+    setRouteCoords(coords);
+
+  } catch (error) {
+    console.error("Route error:", error);
+    alert("Failed to get route");
+  }
+};
 
   return (
     <div>
@@ -59,24 +72,15 @@ function App() {
       {/* Input Section */}
       <div style={{ padding: "10px", textAlign: "center" }}>
         <input
-          placeholder="Source Lat"
-          value={srcLat}
-          onChange={(e) => setSrcLat(e.target.value)}
+          placeholder="Enter Source Location"
+          value={source}
+          onChange={(e) => setSource(e.target.value)}
         />
+
         <input
-          placeholder="Source Lng"
-          value={srcLng}
-          onChange={(e) => setSrcLng(e.target.value)}
-        />
-        <input
-          placeholder="Dest Lat"
-          value={destLat}
-          onChange={(e) => setDestLat(e.target.value)}
-        />
-        <input
-          placeholder="Dest Lng"
-          value={destLng}
-          onChange={(e) => setDestLng(e.target.value)}
+          placeholder="Enter Destination Location"
+          value={destination}
+          onChange={(e) => setDestination(e.target.value)}
         />
         <button onClick={getRoute}>Show Route</button>
       </div>
