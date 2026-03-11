@@ -9,7 +9,8 @@ import {
 } from "react-leaflet";
 
 function App() {
-  const [hotspots, setHotspots] = useState([]);
+  const [allHotspots, setAllHotspots] = useState([]);
+  const [filteredHotspots, setFilteredHotspots] = useState([]);
   const [routeCoords, setRouteCoords] = useState([]);
 
   // Input states
@@ -18,11 +19,14 @@ function App() {
 
   // Fetch hotspots
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/hotspots")
-      .then((res) => setHotspots(res.data))
-      .catch((err) => console.error(err));
-  }, []);
+  axios
+    .get("http://localhost:5000/hotspots")
+    .then((res) => {
+      setAllHotspots(res.data);
+      setFilteredHotspots(res.data);
+    })
+    .catch((err) => console.error(err));
+}, []);
 
   // Color based on risk
   const getColor = (risk) => {
@@ -30,6 +34,24 @@ function App() {
     if (risk === "Medium") return "orange";
     return "green";
   };
+
+  // Distance between two coordinates (meters)
+const getDistance = (lat1, lon1, lat2, lon2) => {
+  const R = 6371000; // Earth radius in meters
+  const toRad = (value) => (value * Math.PI) / 180;
+
+  const dLat = toRad(lat2 - lat1);
+  const dLon = toRad(lon2 - lon1);
+
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(toRad(lat1)) *
+      Math.cos(toRad(lat2)) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+};
 
   // Fetch route
   const getRoute = async () => {
@@ -58,6 +80,21 @@ function App() {
     );
 
     setRouteCoords(coords);
+
+      // Filter hotspots near route (within 500 meters)
+    const filtered = allHotspots.filter((spot) => {
+      return coords.some((routePoint) => {
+        const distance = getDistance(
+          spot.lat,
+          spot.lng,
+          routePoint[0],
+          routePoint[1]
+        );
+        return distance <= 500;
+      });
+    });
+
+    setFilteredHotspots(filtered);
 
   } catch (error) {
     console.error("Route error:", error);
@@ -94,7 +131,7 @@ function App() {
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
         {/* Hotspots */}
-        {hotspots.map((spot, index) => (
+        {filteredHotspots.map((spot, index) => (
           <Circle
             key={index}
             center={[spot.lat, spot.lng]}
