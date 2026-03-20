@@ -1,0 +1,184 @@
+.analysis-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 5rem 2rem 6rem;
+  position: relative;
+}
+
+.blob { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.12; pointer-events: none; z-index: 0; }
+.blob-1 { width: 500px; height: 500px; background: var(--orange); top: -80px; right: -120px; }
+
+/* ── Hero ── */
+.analysis-hero { position: relative; z-index: 1; margin-bottom: 2.5rem; }
+.analysis-title {
+  font-family: var(--font-head);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin: 0.5rem 0 1rem;
+  color: var(--white);
+}
+.analysis-sub { font-size: 0.95rem; color: var(--muted); line-height: 1.7; max-width: 580px; }
+
+/* ── Search ── */
+.city-search { position: relative; z-index: 1; margin-bottom: 2rem; }
+.city-input-row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+.city-input {
+  flex: 1;
+  min-width: 260px;
+  background: rgba(255,255,255,0.05);
+  border: 1.5px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: 0.75rem 1.1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.city-input::placeholder { color: var(--muted); }
+.city-input:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px rgba(245,200,0,0.1); }
+
+.btn-analyse {
+  font-size: 0.9rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+.city-status {
+  margin-top: 0.75rem;
+  font-size: 0.82rem;
+  color: var(--muted);
+  padding: 0.5rem 0.75rem;
+  background: rgba(255,255,255,0.04);
+  border-left: 3px solid var(--yellow);
+  border-radius: 0 8px 8px 0;
+}
+
+/* ── Spinner ── */
+.spinner-dark {
+  display: inline-block;
+  width: 16px; height: 16px;
+  border: 2.5px solid var(--navy);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin-slow 0.7s linear infinite;
+}
+
+/* ── Stats Cards ── */
+.city-stats {
+  position: relative; z-index: 1;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.city-stat-card {
+  flex: 1;
+  min-width: 130px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1rem;
+  text-align: center;
+  transition: transform 0.2s;
+}
+.city-stat-card:hover { transform: translateY(-3px); }
+.city-stat-total { border-color: rgba(245,200,0,0.3) !important; }
+
+.city-stat-value {
+  display: block;
+  font-family: var(--font-head);
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+.city-stat-label { font-size: 0.75rem; color: var(--muted); }
+
+/* ── Results: Map + List side by side ── */
+.city-results {
+  position: relative; z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .city-results { grid-template-columns: 1fr; }
+}
+
+/* ── Map ── */
+.city-map-wrapper { position: relative; z-index: 1; }
+.city-map {
+  height: 480px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+/* ── List ── */
+.city-list-wrapper { position: relative; z-index: 1; }
+.city-list {
+  max-height: 480px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.city-list-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.65rem 0.9rem;
+  transition: border-color 0.2s;
+}
+.city-list-item:hover { border-color: rgba(255,255,255,0.15); }
+
+.list-index {
+  font-family: var(--font-head);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--muted);
+  width: 22px;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.list-coords { flex: 1; display: flex; flex-direction: column; gap: 0.1rem; }
+.list-lat, .list-lng { font-size: 0.75rem; color: var(--muted); font-family: monospace; }
+
+.list-prob {
+  font-size: 0.75rem;
+  color: var(--muted);
+  width: 42px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.list-risk {
+  font-family: var(--font-head);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid;
+  flex-shrink: 0;
+}
+
+/* ── No results ── */
+.no-results {
+  text-align: center;
+  padding: 3rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+  position: relative; z-index: 1;
+}

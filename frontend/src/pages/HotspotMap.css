@@ -1,0 +1,196 @@
+.map-page {
+  display: flex;
+  height: calc(100vh - 64px); /* full height minus header */
+  overflow: hidden;
+}
+
+/* ── Sidebar ── */
+.map-sidebar {
+  width: 300px;
+  min-width: 280px;
+  background: var(--navy-mid);
+  border-right: 1px solid var(--border);
+  padding: 1.5rem 1.25rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sidebar-title {
+  font-family: var(--font-head);
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--white);
+}
+
+.sidebar-sub {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ── Inputs ── */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.input-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+.map-input {
+  background: rgba(255,255,255,0.05);
+  border: 1.5px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  padding: 0.6rem 0.9rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.map-input::placeholder { color: var(--muted); }
+
+.map-input:focus {
+  border-color: var(--yellow);
+  box-shadow: 0 0 0 3px rgba(245,200,0,0.12);
+}
+
+/* ── Buttons ── */
+.btn-search {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.7rem;
+  width: 100%;
+  border-radius: 10px;
+  background: var(--yellow);
+  color: var(--navy);
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+}
+
+.btn-search:hover:not(:disabled) { transform: translateY(-1px); }
+.btn-search:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-reset {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 0.55rem;
+  width: 100%;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid rgba(255,255,255,0.08);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.btn-reset:hover {
+  color: var(--white);
+  border-color: rgba(255,255,255,0.2);
+}
+
+/* ── Spinner ── */
+.spinner {
+  display: inline-block;
+  width: 18px; height: 18px;
+  border: 2.5px solid var(--navy);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin-slow 0.7s linear infinite;
+}
+
+/* ── Status ── */
+.status-msg {
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.4;
+  padding: 0.5rem 0.75rem;
+  background: rgba(255,255,255,0.04);
+  border-radius: 8px;
+  border-left: 3px solid var(--yellow);
+}
+
+/* ── Legend ── */
+.legend {
+  padding: 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.legend-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px currentColor;
+}
+
+.legend-label {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+/* ── Stats Panel ── */
+.stats-panel {
+  padding: 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.stat-row:last-child { border-bottom: none; }
+
+.stat-total { margin-top: 0.3rem; padding-top: 0.5rem; }
+.stat-total .stat-name { color: var(--white); font-weight: 600; }
+.stat-total .stat-count { color: var(--yellow); font-weight: 700; }
+
+.stat-name { font-size: 0.82rem; font-weight: 500; }
+.stat-count {
+  font-family: var(--font-head);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--white);
+}
+
+/* ── Map Container ── */
+.map-container-wrapper {
+  flex: 1;
+  position: relative;
+}
+
+/* ── Responsive ── */
+@media (max-width: 720px) {
+  .map-page { flex-direction: column; height: auto; }
+  .map-sidebar { width: 100%; min-width: unset; }
+  .map-container-wrapper { height: 60vh; }
+}

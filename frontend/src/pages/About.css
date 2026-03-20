@@ -1,0 +1,247 @@
+.about-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.blob { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.12; pointer-events: none; z-index: 0; }
+.blob-1 { width: 450px; height: 450px; background: var(--yellow); top: -100px; right: -100px; }
+.blob-2 { width: 350px; height: 350px; background: var(--red);    bottom: 100px; left: -80px; }
+
+/* ── Hero ── */
+.about-hero {
+  position: relative; z-index: 1;
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.about-title {
+  font-family: var(--font-head);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin: 0.5rem 0 1rem;
+  color: var(--white);
+}
+
+.about-desc {
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 660px;
+  margin: 0 auto;
+}
+
+/* ── Mission ── */
+.mission-section {
+  position: relative; z-index: 1;
+  margin-bottom: 3.5rem;
+}
+
+.mission-card {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+}
+
+.mission-icon { font-size: 2.5rem; flex-shrink: 0; }
+
+.mission-title {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--yellow);
+  margin-bottom: 0.5rem;
+}
+
+.mission-text { font-size: 0.9rem; color: var(--muted); line-height: 1.7; }
+
+/* ── Section headings ── */
+.section-heading {
+  font-family: var(--font-head);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 700;
+  text-align: center;
+  color: var(--white);
+  margin-bottom: 2rem;
+}
+
+/* ── Tech Stack ── */
+.tech-section {
+  position: relative; z-index: 1;
+  margin-bottom: 3.5rem;
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
+}
+
+.tech-card {
+  background: var(--navy-mid);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.tech-card:hover {
+  border-color: var(--yellow);
+  transform: translateY(-3px);
+}
+
+.tech-layer {
+  font-family: var(--font-head);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--yellow);
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.tech-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+.tech-tag {
+  font-size: 0.75rem;
+  padding: 0.3rem 0.7rem;
+  background: rgba(245,200,0,0.1);
+  color: var(--white);
+  border-radius: 999px;
+  border: 1px solid rgba(245,200,0,0.2);
+}
+
+/* ── Team ── */
+.team-section {
+  position: relative; z-index: 1;
+  margin-bottom: 3.5rem;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.team-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem 1rem;
+  text-align: center;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.team-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--yellow);
+}
+
+.team-emoji { font-size: 2.4rem; display: block; margin-bottom: 0.75rem; }
+
+.team-name {
+  font-family: var(--font-head);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.3rem;
+}
+
+.team-role { font-size: 0.78rem; color: var(--muted); }
+
+.team-note {
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.team-note code {
+  background: rgba(255,255,255,0.08);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  color: var(--yellow);
+}
+
+/* ── Contact ── */
+.contact-section {
+  position: relative; z-index: 1;
+  margin-top: 3.5rem;
+}
+
+.contact-card {
+  background: linear-gradient(135deg, var(--navy-light), #1f1060);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) * 1.5);
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.contact-icon { font-size: 2.5rem; display: block; margin-bottom: 1rem; }
+
+.contact-title {
+  font-family: var(--font-head);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 0.75rem;
+}
+
+.contact-sub {
+  font-size: 0.92rem;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 480px;
+  margin: 0 auto 1.75rem;
+}
+
+.contact-links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-head);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--navy);
+  background: var(--yellow);
+  padding: 0.6rem 1.4rem;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: transform 0.15s, box-shadow 0.2s;
+}
+
+.contact-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(245,200,0,0.35);
+}
+
+.contact-note {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.contact-note code {
+  background: rgba(255,255,255,0.08);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  color: var(--yellow);
+  font-size: 0.68rem;
+}
